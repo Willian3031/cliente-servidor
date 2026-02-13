@@ -1,14 +1,40 @@
 <h3>Registro de Tarea</h3>
 
-<label>Título:</label>
-<input type="text" [(ngModel)]="titulo">
+<form [formGroup]="formulario" (ngSubmit)="registrar()">
 
-<br><br>
+  <label>Título</label>
+  <input type="text" formControlName="titulo">
+  <small *ngIf="formulario.get('titulo')?.invalid && formulario.get('titulo')?.touched">
+    El título es obligatorio y mínimo 3 caracteres.
+  </small>
 
-<label>Descripción:</label>
-<input type="text" [(ngModel)]="descripcion">
+  <label>Descripción</label>
+  <input type="text" formControlName="descripcion">
+  <small *ngIf="formulario.get('descripcion')?.invalid && formulario.get('descripcion')?.touched">
+    La descripción es obligatoria y mínimo 5 caracteres.
+  </small>
 
-<br><br>
+  <label>Fecha límite</label>
+  <input type="date" formControlName="fechaLimite">
+  <small *ngIf="formulario.get('fechaLimite')?.invalid && formulario.get('fechaLimite')?.touched">
+    La fecha es obligatoria.
+  </small>
 
-<button (click)="registrar()">Registrar</button>
+  <label>Prioridad</label>
+  <select formControlName="prioridad">
+    <option value="baja">Baja</option>
+    <option value="media">Media</option>
+    <option value="alta">Alta</option>
+  </select>
 
+  <label>Estado</label>
+  <select formControlName="estado">
+    <option value="pendiente">Pendiente</option>
+    <option value="en_progreso">En progreso</option>
+    <option value="completada">Completada</option>
+  </select>
+
+  <br><br>
+  <button type="submit">Registrar</button>
+
+</form>
