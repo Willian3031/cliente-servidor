@@ -19,46 +19,66 @@ app.use(cors());
 // Permite recibir datos en formato JSON
 app.use(express.json());
 
-// Simulación de base de datos en memoria
-let tareas = [];
-
 /*
 Endpoint para registrar una tarea
 POST /api/tareas
 */
-app.post('/api/tareas', (req, res) => {
+app.post('/api/tareas', async (req, res) => {
 
-    const { titulo, descripcion, fechaLimite, prioridad, estado } = req.body;
+    try {
 
-    if (!titulo || !descripcion || !fechaLimite || !prioridad || !estado) {
-        return res.status(400).json({
-            mensaje: 'Todos los campos son obligatorios'
+        const { titulo, descripcion, fechaLimite, prioridad, estado } = req.body;
+
+        if (!titulo || !descripcion || !fechaLimite || !prioridad || !estado) {
+            return res.status(400).json({
+                mensaje: 'Todos los campos son obligatorios'
+            });
+        }
+
+        const nuevaTarea = new Tarea({
+            titulo,
+            descripcion,
+            fechaLimite,
+            prioridad,
+            estado
         });
+
+        await nuevaTarea.save();
+
+        res.status(201).json({
+            mensaje: 'Tarea guardada en MongoDB',
+            tarea: nuevaTarea
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            mensaje: 'Error al guardar la tarea'
+        });
+
     }
 
-    const nuevaTarea = {
-        id: tareas.length + 1,
-        titulo,
-        descripcion,
-        fechaLimite,
-        prioridad,
-        estado
-    };
-
-    tareas.push(nuevaTarea);
-
-    res.status(201).json({
-        mensaje: 'Tarea registrada correctamente',
-        tarea: nuevaTarea
-    });
 });
 
 /*
 Endpoint para consultar tareas
 GET /api/tareas
 */
-app.get('/api/tareas', (req, res) => {
-    res.json(tareas);
+app.get('/api/tareas', async (req, res) => {
+
+    try {
+
+        const tareas = await Tarea.find();
+        res.json(tareas);
+
+    } catch (error) {
+
+        res.status(500).json({
+            mensaje: 'Error al consultar tareas'
+        });
+
+    }
+
 });
 
 // Manejo básico de errores
