@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Tarea } from '../../modelos/tarea.model';
 
 @Component({
   selector: 'app-gestion-tareas',
@@ -8,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class GestionTareas {
 
+  // Arreglo que almacena las tareas registradas
+  listaTareas: Tarea[] = [];
+
+  // Método que recibe la tarea emitida por el componente hijo
+  agregarTarea(tarea: Tarea): void {
+    this.listaTareas.push(tarea);
+  }
 }
