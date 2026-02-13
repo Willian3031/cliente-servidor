@@ -34,24 +34,25 @@ export class RegistroTarea {
   titulo: string = '';
   descripcion: string = '';
 
+  // Método para registrar la tarea
   registrar(): void {
 
-    // Validación básica para evitar campos vacíos
-    if (!this.titulo || !this.descripcion) {
+    // Si el formulario es inválido, se marcan todos los campos
+    if (this.formulario.invalid) {
+      this.formulario.markAllAsTouched();
       return;
     }
 
-    const nuevaTarea: Tarea = {
-      titulo: this.titulo,
-      descripcion: this.descripcion
-    };
+    const nuevaTarea: Tarea = this.formulario.value;
 
     // Emitimos la tarea al componente padre
     this.tareaRegistrada.emit(nuevaTarea);
 
-    // Limpiamos los campos
-    this.titulo = '';
-    this.descripcion = '';
+    // Reiniciamos el formulario con valores por defecto
+    this.formulario.reset({
+      prioridad: 'media',
+      estado: 'pendiente'
+    });
   }
 }
 
