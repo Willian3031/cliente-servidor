@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Tarea } from '../../modelos/tarea.model';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Tareas } from '../../servicios/tareas';
 
 @Component({
   selector: 'app-registro-tarea',
@@ -19,7 +20,7 @@ export class RegistroTarea {
   formulario: any;
 
   // Creamos el construtor para inyectar el formulario reactivo
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private tareasService: Tareas) {
 
   // Se crea el formulario reactivo utilizando FormBuilder
   this.formulario = this.fb.group({
@@ -34,21 +35,31 @@ export class RegistroTarea {
   // Método para registrar la tarea
   registrar(): void {
 
-    // Si el formulario es inválido, se marcan todos los campos
-    if (this.formulario.invalid) {
-      this.formulario.markAllAsTouched();
-      return;
-    }
+  if (this.formulario.invalid) {
+    this.formulario.markAllAsTouched();
+    return;
+  }
 
-    const nuevaTarea: Tarea = this.formulario.value;
+  // Creamos un objeto tarea a partir de los valores del formulario
+  const nuevaTarea = this.formulario.value as Tarea;
 
-    // Emitimos la tarea al componente padre
-    this.tareaRegistrada.emit(nuevaTarea);
+  this.tareasService.registrarTarea(nuevaTarea)
+    .subscribe({
+      next: (respuesta) => {
 
-    // Reiniciamos el formulario con valores por defecto
-    this.formulario.reset({
-      prioridad: 'media',
-      estado: 'pendiente'
+        // Emitimos la tarea guardada (la que viene del backend)
+        this.tareaRegistrada.emit(respuesta.tarea);
+
+        // Reiniciamos formulario
+        this.formulario.reset({
+          prioridad: 'media',
+          estado: 'pendiente'
+        });
+
+      },
+      error: (error) => {
+        console.error('Error al guardar:', error);
+      }
     });
   }
 }
