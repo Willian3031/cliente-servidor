@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Tarea } from '../../modelos/tarea.model';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-listado-tareas',
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './listado-tareas.html',
   styleUrl: './listado-tareas.scss',
 })

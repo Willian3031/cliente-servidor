@@ -1,1 +1,8 @@
-<p>listado-tareas works!</p>
+<h3>Listado de Tareas</h3>
+
+<ul>
+  <li *ngFor="let tarea of tareas">
+    <strong>{{ tarea.titulo }}</strong> - {{ tarea.descripcion }}
+  </li>
+</ul>
+
