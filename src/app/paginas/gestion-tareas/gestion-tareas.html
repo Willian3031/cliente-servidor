@@ -1,1 +1,14 @@
-<p>gestion-tareas works!</p>
+<div style="display: flex; gap: 50px;">
+
+  <!-- Componente hijo que emite evento -->
+  <app-registro-tarea
+    (tareaRegistrada)="agregarTarea($event)">
+  </app-registro-tarea>
+
+  <!-- Componente hijo que recibe datos -->
+  <app-listado-tareas
+    [tareas]="listaTareas">
+  </app-listado-tareas>
+
+</div>
+

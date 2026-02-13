@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Tarea } from '../../modelos/tarea.model';
+import { RegistroTarea } from "../../componentes/registro-tarea/registro-tarea";
+import { ListadoTareas } from "../../componentes/listado-tareas/listado-tareas";
 
 @Component({
   selector: 'app-gestion-tareas',
-  imports: [],
+  imports: [RegistroTarea, ListadoTareas],
   templateUrl: './gestion-tareas.html',
   styleUrl: './gestion-tareas.scss',
 })
