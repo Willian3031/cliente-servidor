@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './registro-tarea.html',
   styleUrls: ['./registro-tarea.css']
 })
-export class RegistroTareaComponent {
+export class RegistroTarea {
 
   // Este decorador permite enviar información al componente padre
   @Output() tareaRegistrada = new EventEmitter<Tarea>();
