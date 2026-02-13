@@ -31,10 +31,6 @@ export class RegistroTarea {
   });
 }
 
-
-  titulo: string = '';
-  descripcion: string = '';
-
   // Método para registrar la tarea
   registrar(): void {
 
