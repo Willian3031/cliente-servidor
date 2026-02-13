@@ -1,1 +1,14 @@
-<p>registro-tarea works!</p>
+<h3>Registro de Tarea</h3>
+
+<label>Título:</label>
+<input type="text" [(ngModel)]="titulo">
+
+<br><br>
+
+<label>Descripción:</label>
+<input type="text" [(ngModel)]="descripcion">
+
+<br><br>
+
+<button (click)="registrar()">Registrar</button>
+

@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Tarea } from '../../modelos/tarea.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registro-tarea',
+  imports: [FormsModule],
   templateUrl: './registro-tarea.html',
   styleUrls: ['./registro-tarea.css']
 })
