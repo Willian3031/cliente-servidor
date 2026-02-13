@@ -1,14 +1,15 @@
-<div style="display: flex; gap: 50px;">
+<div class="contenedor-principal">
 
-  <!-- Componente hijo que emite evento -->
-  <app-registro-tarea
-    (tareaRegistrada)="agregarTarea($event)">
-  </app-registro-tarea>
+  <div class="bloque">
+    <app-registro-tarea
+      (tareaRegistrada)="agregarTarea($event)">
+    </app-registro-tarea>
+  </div>
 
-  <!-- Componente hijo que recibe datos -->
-  <app-listado-tareas
-    [tareas]="listaTareas">
-  </app-listado-tareas>
+  <div class="bloque">
+    <app-listado-tareas
+      [tareas]="listaTareas">
+    </app-listado-tareas>
+  </div>
 
 </div>
-

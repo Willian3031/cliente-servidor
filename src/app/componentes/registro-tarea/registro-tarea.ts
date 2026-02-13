@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-registro-tarea',
   imports: [FormsModule],
   templateUrl: './registro-tarea.html',
-  styleUrls: ['./registro-tarea.css']
+  styleUrls: ['./registro-tarea.scss']
 })
 export class RegistroTarea {
 

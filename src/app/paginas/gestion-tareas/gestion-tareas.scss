@@ -1,0 +1,15 @@
+.contenedor-principal {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bloque {
+  width: 45%;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
