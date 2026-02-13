@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const express = require('express');
 const cors = require('cors');
+const Tarea = require('./modelos/tarea');
 
 const app = express();
 const PORT = 3000;
@@ -51,7 +52,7 @@ app.post('/api/tareas', async (req, res) => {
         });
 
     } catch (error) {
-
+        console.error("ERROR REAL:", error);
         res.status(500).json({
             mensaje: 'Error al guardar la tarea'
         });
