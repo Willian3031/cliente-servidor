@@ -1,8 +1,17 @@
+// Se añade mongo
+const mongoose = require('mongoose');
+
 const express = require('express');
 const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
+
+// Conexión a MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/gestion_tareas')
+.then(() => console.log('Conectado a MongoDB'))
+.catch(error => console.error('Error de conexión:', error));
+
 
 // Permite comunicación con Angular
 app.use(cors());
